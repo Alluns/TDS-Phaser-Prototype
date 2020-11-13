@@ -59,25 +59,40 @@
 
         function update() {
 
+            /* Player movement
+            *  the first variables decide the direction the player is moving.
+            *  ex, if playerMovingX is -1 the player moves left, if its 1 they move right and if its 0 it stays in place.
+            */
+
+            var playerMovingX = 0;
+            var playerMovingY = 0;
+
+            //Checks if a specific direction is pressed, then adds or subracts from that direction by 1.
             if (cursors.left.isDown) {
-                player.setVelocityX(-playerSpeed * 100);
+                player.setVelocityX(playerMovingX += -1);
             }
-            else if (cursors.right.isDown) {
-                player.setVelocityX(playerSpeed * 100);
-            }
-            else {
-                player.setVelocityX(0);
+            if (cursors.right.isDown) {
+                player.setVelocityX(playerMovingX += 1);
             }
             if (cursors.up.isDown) {
-                player.setVelocityY(-playerSpeed * 100);
+                player.setVelocityY(playerMovingY += -1);
             }
-            else if (cursors.down.isDown) {
-                player.setVelocityY(playerSpeed * 100);
-            }
-            else {
-                player.setVelocityY(0);
+            if (cursors.down.isDown) {
+                player.setVelocityY(playerMovingY += 1);
             }
 
+            /* Movement algoritm
+            *  if the player is moving on both the X and Y axis then divide the movement algorithm by the square root of 2.
+            *  This is done to prevent the player from moving faster on the hypotenuse.
+            */
+            if (!(playerMovingX === 0) && !(playerMovingY === 0)) {
+                player.setVelocityX(playerMovingX * playerSpeed * 100 / Math.SQRT2);
+                player.setVelocityY(playerMovingY * playerSpeed * 100 / Math.SQRT2);
+            }
+            else {
+                player.setVelocityX(playerMovingX * playerSpeed * 100);
+                player.setVelocityY(playerMovingY * playerSpeed * 100);
+            }
 
         }
 
