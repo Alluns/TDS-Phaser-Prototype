@@ -77,8 +77,8 @@
 
       function shoot(x, y, vx, vy) {
         var projectile = projectiles.create(x, y, "player");
-        projectile.setVelocityX(vx);
-        projectile.setVelocityY(vy);
+        projectile.setVelocityX(vx + 0.2 * player.body.velocity.x);
+        projectile.setVelocityY(vy + 0.2 * player.body.velocity.y);
       }
 
       function update() {
@@ -92,16 +92,16 @@
 
         //Checks if a specific direction is pressed, then adds or subracts from that direction by 1.
         if (cursors.left.isDown) {
-          player.setVelocityX((playerMovingX += -1));
+          playerMovingX += -1;
         }
         if (cursors.right.isDown) {
-          player.setVelocityX((playerMovingX += 1));
+          playerMovingX += 1;
         }
         if (cursors.up.isDown) {
-          player.setVelocityY((playerMovingY += -1));
+          playerMovingY += -1;
         }
         if (cursors.down.isDown) {
-          player.setVelocityY((playerMovingY += 1));
+          playerMovingY += 1;
         }
 
         /* Movement algoritm
